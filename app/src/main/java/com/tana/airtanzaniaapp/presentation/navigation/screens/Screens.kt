@@ -7,3 +7,9 @@ sealed class BottomNavScreens(val route: String, val title: String, val icon: In
     object Explore : BottomNavScreens(route = "explore", title = "Explore", icon = R.drawable.compass_icon)
     object Trip : BottomNavScreens(route = "trip", title = "Trip", icon = R.drawable.shopping_bag_icon)
 }
+
+sealed class OnBoardingScreen(val route: String) {
+    object OnBoardingOne : OnBoardingScreen("onboarding_one")
+    object OnBoardingTwo : OnBoardingScreen("onboarding_two")
+    object OnBoardingThree : OnBoardingScreen("onboarding_three")
+}
