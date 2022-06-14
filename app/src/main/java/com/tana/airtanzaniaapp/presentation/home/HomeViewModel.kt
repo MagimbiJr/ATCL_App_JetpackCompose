@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tana.airtanzaniaapp.data.PreferencesManager
 import com.tana.airtanzaniaapp.data.repository.ATCRepository
 import com.tana.airtanzaniaapp.data.repository.ATCRepositoryImpl
 import com.tana.airtanzaniaapp.util.ATCAppEvents
@@ -20,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: ATCRepository
+    private val repository: ATCRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
@@ -40,11 +41,9 @@ class HomeViewModel @Inject constructor(
                 when(response) {
                     is Resource.Success -> {
                         _uiState.value = HomeUiState(bestTrips = response.data ?: emptyList())
-                        Log.d("TAG", "bestTrips: ${response.data}")
                     }
                     is Resource.Failure -> {
                         _uiState.value = HomeUiState(message = response.message ?: "")
-                        Log.d("TAG", "bestTrips: ${response.message}")
                     }
                     is Resource.Loading -> {
                         _uiState.value = HomeUiState(loading = true)
