@@ -5,6 +5,5 @@
         <item name="windowSplashScreenBackground">#212529</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.AirTanzaniaApp</item>
-        <item name="windowSplashScreenAnimationDuration">600</item>
     </style>
 </resources>

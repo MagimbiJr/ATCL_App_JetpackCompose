@@ -2,6 +2,7 @@ package com.tana.airtanzaniaapp.presentation.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -50,7 +51,7 @@ fun SearchBar(
         },
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .heightIn(48.dp)
             .clip(RoundedCornerShape(12.dp)),
         colors = colors
     )

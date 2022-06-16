@@ -1,60 +1,54 @@
 package com.tana.airtanzaniaapp.presentation.onboarding
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.SystemUiController
+import com.tana.airtanzaniaapp.presentation.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnboardingScreen(
+fun OnBoardingScreen(
     navHostController: NavHostController,
     systemUiController: SystemUiController,
     coroutineScope: CoroutineScope,
+    modifier: Modifier = Modifier,
     viewModel: OnboardingViewModel = hiltViewModel()
 ) {
+    systemUiController.setSystemBarsColor(Color.Black)
     val pagerState = rememberPagerState()
-    val pagerScreens = listOf(
+    val pages = listOf(
         OnboardingPage.First(
-            systemUiController = systemUiController,
             onClick = {
                 coroutineScope.launch {
-                    pagerState.animateScrollToPage(1)
+                    pagerState.animateScrollToPage(
+                        page = 1,
+                    )
                 }
-            },
-            pagerState = pagerState
+            }
         ),
         OnboardingPage.Second(
-            systemUiController = systemUiController,
             onClick = {
-                coroutineScope.launch {
-                    //viewModel.saveOnBoardingState(completed = true)
-                    pagerState.animateScrollToPage(2)
-                }
-            },
-            pagerState = pagerState
+                coroutineScope.launch { pagerState.animateScrollToPage(2) }
+            }
         ),
         OnboardingPage.Third(
-            systemUiController = systemUiController,
-            onLoginClick = {
-                viewModel.saveOnBoardingState(completed = true)
-                navHostController.navigate("login")
-            },
-            onRegister = {
-                viewModel.saveOnBoardingState(completed = true)
-                navHostController.navigate("register")
+            onClick = {
+                viewModel.saveOnBoardingState(true)
+                navHostController.popBackStack()
+                navHostController.navigate("bottom_nav")
             }
         )
     )
-    Column {
-        HorizontalPager(count = pagerScreens.size, state = pagerState) { position ->
-            PagerScreen(onboardingPage = pagerScreens[position])
-        }
+
+    HorizontalPager(count = pages.size, state = pagerState) { page ->
+        PageScreen(page = pages[page], pagerState = pagerState, modifier = modifier)
     }
 }

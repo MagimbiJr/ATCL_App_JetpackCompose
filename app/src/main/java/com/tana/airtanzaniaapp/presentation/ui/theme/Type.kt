@@ -51,13 +51,11 @@ val Typography = Typography(
         fontSize = 16.sp
     ),
     button = TextStyle(
-        fontFamily = MontserratMedium,
-        fontWeight = FontWeight.W600,
-        fontSize = 14.sp
+        fontFamily = MontserratBold,
+        fontSize = 13.sp
     ),
     caption = TextStyle(
-        fontFamily = MontserratLight,
-        fontWeight = FontWeight.Normal,
+        fontFamily = MontserratRegular,
         fontSize = 12.sp
     ),
     overline = TextStyle(
@@ -70,5 +68,10 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         letterSpacing = 0.25.sp
+    ),
+    subtitle1 = TextStyle(
+        fontFamily = MontserratRegular,
+        fontSize = 16.sp,
+        letterSpacing = 0.15.sp
     ),
 )

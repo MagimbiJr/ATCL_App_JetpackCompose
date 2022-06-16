@@ -1,53 +1,32 @@
 package com.tana.airtanzaniaapp.presentation.onboarding
 
-import androidx.compose.runtime.Composable
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.systemuicontroller.SystemUiController
-import com.tana.airtanzaniaapp.presentation.onboarding.components.screens.OnboardingOne
-import com.tana.airtanzaniaapp.presentation.onboarding.components.screens.OnboardingThree
-import com.tana.airtanzaniaapp.presentation.onboarding.components.screens.OnboardingTwo
+import com.tana.airtanzaniaapp.R
 
-sealed class OnboardingPage(val screen: @Composable () -> Unit) {
-    @OptIn(ExperimentalPagerApi::class)
-    class First (
-        val systemUiController: SystemUiController,
-        val onClick: () -> Unit,
-        val pagerState: PagerState
-        ) : OnboardingPage(screen = {
-        OnboardingOne(
-            onNextClick = onClick,
-            systemUiController = systemUiController,
-            pagerState = pagerState
-        )
-    }
-    )
-    @OptIn(ExperimentalPagerApi::class)
-    class Second(
-        val systemUiController: SystemUiController,
-        val onClick: () -> Unit,
-        val pagerState: PagerState
-    ) : OnboardingPage(
-        screen = { 
-            OnboardingTwo(
-                onNextClick = onClick,
-                systemUiController = systemUiController,
-                pagerState = pagerState
-            )
-        }
+sealed class OnboardingPage(
+    val background: Int,
+    val title: String,
+    val description: String,
+    val onClick: () -> Unit,
+) {
+    class First(onClick: () -> Unit) : OnboardingPage(
+        background = R.drawable.landing_bg_1,
+        title = "Explore the World with Us!",
+        description = "Your talent determines what you can do. Your motivation determines " +
+                "how much you’re willing to do. Your attitude determines how well you do it.",
+        onClick = onClick
     )
 
-    class Third(
-        val systemUiController: SystemUiController,
-        val onLoginClick: () -> Unit,
-        val onRegister: () -> Unit
-    ) : OnboardingPage(
-        screen = {
-            OnboardingThree(
-                systemUiController = systemUiController,
-                onLoginClick = onLoginClick,
-                onRegisterClick = onRegister
-            )
-        }
+    class Second(onClick: () -> Unit) : OnboardingPage(
+        background = R.drawable.landing_bg_2,
+        title = "Experience the travel and adventure.",
+        description = "The airline that connects Tanzania more to the world than any other awaits you.",
+        onClick = onClick
+    )
+
+    class Third(onClick: () -> Unit) : OnboardingPage(
+        background = R.drawable.landing_bg_3,
+        title = "Get Started!",
+        description = "Please Log in or register to continue using AirTanzania App",
+        onClick = onClick
     )
 }

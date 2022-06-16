@@ -20,21 +20,18 @@ class SplashViewModel @Inject constructor(
     private val _isLoading = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
     private val currentUser: State<FirebaseUser?> = mutableStateOf(null)
-    private val _startDestination = mutableStateOf("onboarding")
+    private val _startDestination: MutableState<String> = mutableStateOf("onboarding")
     val startDestination: State<String> = _startDestination
 
     init {
         viewModelScope.launch {
             preferencesManager.readOnboardingState().collect { completed ->
                 if (completed) {
-                    if (currentUser.value != null) {
-                        _startDestination.value = "bottom_nav"
-                    }
+                    _startDestination.value = "bottom_nav"
                 } else {
                     _startDestination.value = "onboarding"
                 }
             }
-            delay(2000)
             _isLoading.value = false
         }
     }

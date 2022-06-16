@@ -8,15 +8,20 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.tana.airtanzaniaapp.presentation.SplashViewModel
+import com.tana.airtanzaniaapp.presentation.authentication.login.LoginScreen
+import com.tana.airtanzaniaapp.presentation.authentication.register.RegisterScreen
 import com.tana.airtanzaniaapp.presentation.home.HomeScreen
 import com.tana.airtanzaniaapp.presentation.navigation.ATCNavGraph
 import com.tana.airtanzaniaapp.presentation.ui.theme.AirTanzaniaAppTheme
@@ -32,16 +37,20 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //installSplashScreen()
 
         installSplashScreen().setKeepOnScreenCondition {
             !splashViewModel.isLoading.value
         }
+
 
         setContent {
             val navHostController = rememberNavController()
             val systemUiController = rememberSystemUiController()
             val scrollState = rememberScrollState()
             val coroutineScope = rememberCoroutineScope()
+            val scaffoldState = rememberScaffoldState()
+            val focusManager = LocalFocusManager.current
             val screen by splashViewModel.startDestination
             AirTanzaniaAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -54,7 +63,9 @@ class MainActivity : ComponentActivity() {
                         startDestination = screen,
                         scrollState = scrollState,
                         systemUiController = systemUiController,
-                        coroutineScope = coroutineScope
+                        coroutineScope = coroutineScope,
+                        scaffoldState = scaffoldState,
+                        focusManager = focusManager
                     )
                 }
             }
