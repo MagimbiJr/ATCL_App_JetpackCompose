@@ -6,6 +6,7 @@ sealed class BottomNavScreens(val route: String, val title: String, val icon: In
     object Home : BottomNavScreens(route = "home", title = "Home", icon = R.drawable.home_icon)
     object Explore : BottomNavScreens(route = "explore", title = "Explore", icon = R.drawable.compass_icon)
     object Trip : BottomNavScreens(route = "trip", title = "Trip", icon = R.drawable.shopping_bag_icon)
+    object Profile : BottomNavScreens(route = "profile", title = "Profile", R.drawable.person_icon)
 }
 
 sealed class OnBoardingScreen(val route: String) {

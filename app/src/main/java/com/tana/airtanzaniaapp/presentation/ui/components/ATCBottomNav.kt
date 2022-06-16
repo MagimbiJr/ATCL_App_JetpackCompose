@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.tana.airtanzaniaapp.R
 import com.tana.airtanzaniaapp.presentation.navigation.screens.BottomNavScreens
+import com.tana.airtanzaniaapp.presentation.ui.theme.Onyx
 
 @Composable
 fun ATCBottomNav(
@@ -24,9 +25,10 @@ fun ATCBottomNav(
     val bottomNavItems = listOf(
         BottomNavScreens.Home,
         BottomNavScreens.Explore,
-        BottomNavScreens.Trip
+        BottomNavScreens.Trip,
+        BottomNavScreens.Profile
     )
-    val backgroundColor = if (isSystemInDarkTheme()) MaterialTheme.colors.surface
+    val backgroundColor = if (isSystemInDarkTheme()) Onyx
     else MaterialTheme.colors.background
 
     BottomNavigation(

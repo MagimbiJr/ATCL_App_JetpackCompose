@@ -67,7 +67,7 @@ fun ServiceItem(
             .height(76.dp)
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colors.secondary,
+                color = MaterialTheme.colors.primary.copy(.1f),
                 shape = RoundedCornerShape(4.dp)
             )
             .clickable { onClick() },
