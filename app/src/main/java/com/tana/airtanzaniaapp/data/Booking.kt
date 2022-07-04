@@ -2,16 +2,15 @@ package com.tana.airtanzaniaapp.data
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.tana.airtanzaniaapp.util.Resource
-import java.sql.Timestamp
-import java.util.*
 
 data class Booking(
-    val id: String = UUID.randomUUID().toString(),
-    val departDestination: String = "",
-    val arrivalDestination: String = "",
+    val id: String = "",
+    val flyFrom: String = "",
+    val flyTo: String = "",
     val departDate: String = "",
     val ticketAmount: Long = 0,
-    val classType: String = ""
+    val classType: String = "",
+    val flightId: String = ""
 ) {
     companion object {
         fun DocumentSnapshot.toBooking(): Booking? {
@@ -21,11 +20,12 @@ data class Booking(
                 val departDate = getString("departDate")!!
                 val ticketAmount = getLong("ticketAmount")!!
                 val classType = getString("classType")!!
+                val flightId = getString("flightId")!!
                 Booking(
-                    id = id, departDestination = departDestination,
-                    arrivalDestination = arrivalDestination,
+                    id = id, flyFrom = departDestination,
+                    flyTo = arrivalDestination,
                     departDate = departDate, ticketAmount = ticketAmount,
-                    classType = classType
+                    classType = classType, flightId = flightId
                 )
             } catch (e: Exception) {
                 Resource.Failure(message = e.localizedMessage)

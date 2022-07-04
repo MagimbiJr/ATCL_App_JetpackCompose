@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AirTanzaniaApp" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.AirTanzaniaApp" parent="Theme.MaterialComponents">
         <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.App.DatePicker</item>
+    </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/green_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Customize text field of the text input mode. -->
+
     </style>
 </resources>
