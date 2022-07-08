@@ -1,17 +1,20 @@
 package com.tana.airtanzaniaapp.data
 
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.tana.airtanzaniaapp.util.Resource
-import java.sql.Timestamp
-import java.util.*
 
 data class Booking(
-    val id: String = UUID.randomUUID().toString(),
-    val departDestination: String = "",
-    val arrivalDestination: String = "",
+    val id: String = "",
+    val flyFrom: String = "",
+    val flyTo: String = "",
     val departDate: String = "",
+    val departTime: String = "",
     val ticketAmount: Long = 0,
-    val classType: String = ""
+    val seats: Long = 0,
+    val classType: String = "",
+    val flightId: String = "",
+    val userId: String = ""
 ) {
     companion object {
         fun DocumentSnapshot.toBooking(): Booking? {
@@ -19,15 +22,19 @@ data class Booking(
                 val departDestination = getString("departString")!!
                 val arrivalDestination = getString("arrivalDestination")!!
                 val departDate = getString("departDate")!!
+                val departTime = getString("departTime")!!
                 val ticketAmount = getLong("ticketAmount")!!
+                val seats = getLong("seat")!!
                 val classType = getString("classType")!!
+                val flightId = getString("flightId")!!
+                val userId = getString("userId")!!
                 Booking(
-                    id = id, departDestination = departDestination,
-                    arrivalDestination = arrivalDestination,
-                    departDate = departDate, ticketAmount = ticketAmount,
-                    classType = classType
+                    id = id, flyFrom = departDestination,
+                    flyTo = arrivalDestination,
+                    departDate = departDate, departTime = departTime, ticketAmount = ticketAmount,
+                    seats = seats, classType = classType, flightId = flightId, userId = userId
                 )
-            } catch (e: Exception) {
+            } catch (e: FirebaseFirestoreException) {
                 Resource.Failure(message = e.localizedMessage)
                 null
             }

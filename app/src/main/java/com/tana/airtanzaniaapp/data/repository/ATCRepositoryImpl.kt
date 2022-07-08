@@ -19,13 +19,13 @@ class ATCRepositoryImpl @Inject constructor(
 ) : ATCRepository {
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun bestTrips(): Flow<Resource<List<Destination>>> = callbackFlow {
 
         val trips = db.collection("best trips")
         val snapShotListener = trips.addSnapshotListener { value, error ->
             val response = if (value != null) {
                 val data = value.documents.mapNotNull { it.toDestination() }
+                Log.d("TAG", "bestTrips: $value")
                 Resource.Success(data = data)
 
             } else {

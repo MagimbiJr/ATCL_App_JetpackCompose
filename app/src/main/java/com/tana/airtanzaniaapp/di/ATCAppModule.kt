@@ -4,10 +4,7 @@ import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tana.airtanzaniaapp.data.PreferencesManager
-import com.tana.airtanzaniaapp.data.repository.ATCRepository
-import com.tana.airtanzaniaapp.data.repository.ATCRepositoryImpl
-import com.tana.airtanzaniaapp.data.repository.AuthRepository
-import com.tana.airtanzaniaapp.data.repository.AuthRepositoryImpl
+import com.tana.airtanzaniaapp.data.repository.*
 import com.tana.airtanzaniaapp.domain.auth_use_case.*
 import dagger.Module
 import dagger.Provides
@@ -38,6 +35,11 @@ object ATCAppModule {
     @Singleton
     fun provideAuthRepository(db: FirebaseFirestore, auth: FirebaseAuth): AuthRepository =
         AuthRepositoryImpl(db = db, auth = auth)
+
+    @Provides
+    @Singleton
+    fun provideBookingRepository(db: FirebaseFirestore): BookingRepository =
+        BookingRepositoryImpl(db = db)
 
     @Provides
     @Singleton
