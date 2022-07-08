@@ -10,7 +10,7 @@ interface BookingRepository {
     fun searchFlight(
         from: String,
         to: String,
-        date: String
+        date: String,
     ): Flow<Resource<List<Flight>>>
 
     fun booking(): Flow<Resource<Booking>>

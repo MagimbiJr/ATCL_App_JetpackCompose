@@ -14,5 +14,5 @@ data class SearchFlightUiState (
     val toTextField: String = "",
     val scheduledDate: LocalDate = LocalDate.now(),
     val passengersTextField: String = "",
-    val classTextField: String = ""
+    val classTextField: String = "",
 )

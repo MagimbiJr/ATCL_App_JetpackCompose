@@ -14,7 +14,9 @@ data class Flight(
     val departureAirport: String = "",
     val arrivalTime: String = "",
     val arrivalAirport: String = "",
-    val price: Long = 0
+    val price: Long = 0,
+    val economy: Long = 0,
+    val business: Long = 0
 ) {
     companion object {
         fun DocumentSnapshot.toFlight(): Flight? {
@@ -29,11 +31,13 @@ data class Flight(
                 val arrivalTime = getString("arrivalTime")!!
                 val arrivalAirport = getString("arrivalAirport")!!
                 val price = getLong("price")!!
+                val economy = getLong("economy")!!
+                val business = getLong("business")!!
                 Flight(
                     flightId = id, flightName = flightName, flyFrom = flyFrom,
                     flyTo = flyTo, date = date, flightTime = flightTime,departureTime = departureTime,
                     departureAirport = departureAirport, arrivalAirport = arrivalAirport,
-                    arrivalTime = arrivalTime, price = price
+                    arrivalTime = arrivalTime, price = price, economy = economy, business = business
                 )
             } catch (e: Exception) {
                 Resource.Failure(e.localizedMessage)

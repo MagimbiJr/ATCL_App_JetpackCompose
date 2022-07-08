@@ -15,6 +15,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.tana.airtanzaniaapp.R
@@ -70,29 +71,6 @@ fun SearchContent(
             )
         )
         Spacer(modifier = modifier.height(12.dp))
-//        ATCTextField(
-//            text = uiState.dateTextField,
-//            onTextChange = onDateTextFieldChange,
-//            label = "Departure",
-//            keyboardOptions = KeyboardOptions(
-//                capitalization = KeyboardCapitalization.Sentences,
-//                imeAction = ImeAction.Next
-//            ),
-//            keyboardActions = KeyboardActions(
-//                onNext = { focusManager.moveFocus(FocusDirection.Down) }
-//            ),
-//            trailingIcon = {
-//                IconButton(onClick = { /*TODO*/ }) {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.calender_icon),
-//                        contentDescription = "Calender icon",
-//                        modifier = modifier
-//                            .size(24.dp),
-//                        tint = MaterialTheme.colors.onBackground.copy(.3f)
-//                    )
-//                }
-//            }
-//        )
         ATCDatePicker(
             value = uiState.scheduledDate,
             onDateChange = onDateScheduleChange
@@ -104,7 +82,8 @@ fun SearchContent(
             label = "Passengers",
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
-                imeAction = ImeAction.Next
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Number
             ),
             keyboardActions = KeyboardActions(
                 onNext = { focusManager.moveFocus(FocusDirection.Down) }

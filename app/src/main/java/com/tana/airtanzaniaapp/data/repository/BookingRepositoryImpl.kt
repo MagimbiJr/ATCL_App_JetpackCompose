@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.tana.airtanzaniaapp.data.Booking
 import com.tana.airtanzaniaapp.data.Flight
 import com.tana.airtanzaniaapp.data.Flight.Companion.toFlight
+import com.tana.airtanzaniaapp.data.FlightCapacity
 import com.tana.airtanzaniaapp.util.Resource
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,9 @@ class BookingRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore
 ) : BookingRepository {
 
-    override fun searchFlight(from: String, to: String, date: String): Flow<Resource<List<Flight>>> = callbackFlow {
+    override fun searchFlight(
+        from: String, to: String, date: String
+    ): Flow<Resource<List<Flight>>> = callbackFlow {
         val flights = db.collection("flights").whereEqualTo("flyFrom", from)
             .whereEqualTo("flyTo", to).whereEqualTo("date", date)
         val snapShotListener = flights.addSnapshotListener { value, error ->
